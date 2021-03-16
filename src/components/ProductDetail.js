@@ -2,6 +2,7 @@
 import DeleteButton from "./buttons/DeleteButton";
 // Styling
 import { DetailWrapper } from "../styles";
+import cookieStore from "../stores/CookieStore";
 
 const ProductDetail = (props) => {
   const product = props.product;
@@ -9,13 +10,13 @@ const ProductDetail = (props) => {
   return (
     <DetailWrapper>
       <p onClick={props.selectProduct}>Back to Products</p>
-      <h1>{product.name}</h1>
-      <img src={product.image} alt={product.name} />
-      <p>{product.description}</p>
-      <p>{product.price} KD</p>
+      <h1>{cookieStore.products.name}</h1>
+      <img src={cookieStore.products.image} alt={cookieStore.products.name} />
+      <p>{cookieStore.products.description}</p>
+      <p>{cookieStore.products.price} KD</p>
       <DeleteButton
-        productId={product.id}
-        deleteProduct={props.deleteProduct}
+        productId={cookieStore.products.id}
+        deleteProduct={cookieStore.deleteProduct(cookieStore.products.id)}
       />
     </DetailWrapper>
   );

@@ -1,9 +1,12 @@
 // Styling
 import { DeleteButtonStyled } from "../../styles";
+import cookieStore from "../../stores/CookieStore";
 
 const DeleteButton = (props) => {
   return (
-    <DeleteButtonStyled onClick={() => props.deleteProduct(props.productId)}>
+    <DeleteButtonStyled
+      onClick={() => cookieStore.deleteProduct(props.productId)}
+    >
       Delete
     </DeleteButtonStyled>
   );

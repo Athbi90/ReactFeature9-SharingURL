@@ -1,9 +1,15 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
 `;
-
+export const Logo = styled.img`
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  padding: 5px;
+`;
 export const Description = styled.h4`
   text-align: center;
 `;
