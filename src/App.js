@@ -19,6 +19,7 @@ import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 // Data
 import products from "./products";
+import Signup from "./components/Signup";
 
 const theme = {
   light: {
@@ -60,6 +61,9 @@ function App() {
             products={_products}
             deleteProduct={cookieStore.deleteProduct}
           />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
         </Route>
       </Switch>
     </ThemeProvider>
