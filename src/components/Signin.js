@@ -1,30 +1,33 @@
 import { useState } from "react";
 import authStore from "../stores/AuthStore";
+import { observer } from "mobx-react";
 
-const Signup = () => {
+const Signin = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    authStore.signup(user);
-    event.target.reset();
-  };
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    authStore.signin(user);
+    event.target.reset();
+  };
+
   return (
     <div>
-      <h3>Sign up</h3>
+      <h3>Sign in</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
           <input
+            type="text"
             name="username"
             value={user.username}
-            type="text"
             className="form-control"
             onChange={handleChange}
           />
@@ -32,17 +35,16 @@ const Signup = () => {
         <div className="form-group">
           <label>Password</label>
           <input
+            type="password"
             name="password"
             value={user.password}
-            type="password"
             className="form-control"
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
-
-export default Signup;
+export default observer(Signin);

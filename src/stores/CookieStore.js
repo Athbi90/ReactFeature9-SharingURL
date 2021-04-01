@@ -1,6 +1,7 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import products from "../products.js";
+import instance from "./instance";
+
 class CookieStore {
   products = [];
   constructor() {
@@ -12,7 +13,7 @@ class CookieStore {
 
   fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/products");
+      const response = await instance.get("/products");
       this.products = response.data;
     } catch (error) {
       console.log(error);
@@ -20,7 +21,7 @@ class CookieStore {
   };
   deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/products/:${id}`);
+      await instance.delete(`/products/:${id}`);
       this.products = this.products.filter((product) => product.id !== +id);
     } catch (error) {
       console.log(error);
@@ -28,10 +29,7 @@ class CookieStore {
   };
   createProduct = async (newProduct) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/products",
-        newProduct
-      );
+      const response = await instance.post("/products", newProduct);
       this.products.push(response.data);
     } catch (error) {
       console.log(error);
@@ -40,10 +38,7 @@ class CookieStore {
 
   updateProduct = async (updatedProduct) => {
     try {
-      await axios.put(
-        `http://localhost:8000/products/${updatedProduct.id}`,
-        updatedProduct
-      );
+      await instance.put(`/products/${updatedProduct.id}`, updatedProduct);
       const product = this.products.find(
         (prod) => prod.id === updatedProduct.id
       );
